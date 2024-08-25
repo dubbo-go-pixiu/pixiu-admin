@@ -40,7 +40,7 @@ func Init(mysqlConf config.MysqlConfig) {
 	//username, password, host, port, dbname := config.Bootstrap.GetMysqlConfig()
 	//dataSourceName := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname + "?charset=utf8"
 	//db, err = sql.Open(MysqlDriver, dataSourceName)
-	connectStr := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
+	connectStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8",
 		mysqlConf.Username, mysqlConf.Password,
 		mysqlConf.Host, mysqlConf.Port, mysqlConf.Dbname)
 	db, err = sql.Open(MysqlDriver, connectStr)
