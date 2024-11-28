@@ -21,16 +21,12 @@ import (
 	"fmt"
 	"os"
 	"time"
-)
 
-import (
+	"github.com/dubbogo/pixiu-admin/pkg/global"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-)
 
-import (
-	"github.com/dubbogo/pixiu-admin/pkg/global"
-	"github.com/dubbogo/pixiu-admin/pkg/utils"
+	utils "github.com/dubbogo/pixiu-admin/pkg/utils"
 )
 
 var level zapcore.Level

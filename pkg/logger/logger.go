@@ -19,8 +19,10 @@ package logger
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path"
+	"path/filepath"
+	"runtime"
 	"sync"
 )
 
@@ -59,7 +61,17 @@ type Logger interface {
 }
 
 func init() {
-	logConfFile := "./conf/log.yml"
+	// 获取当前文件所在目录
+	_, currentFilePath, _, ok := runtime.Caller(0)
+	if !ok {
+		fmt.Println("Failed to get current file path")
+		return
+	}
+	currentDir := filepath.Dir(currentFilePath)
+
+	// 拼接配置文件路径
+	logConfFile := filepath.Join(currentDir, "log.yml")
+	fmt.Printf("Using log configuration file: %s\n", logConfFile)
 	err := InitLog(logConfFile)
 	if err != nil {
 		logger.Infof("[InitLog] warn: %v", err)
@@ -77,10 +89,10 @@ func InitLog(logConfFile string) error {
 		return perrors.New(fmt.Sprintf("log configure file name %s suffix must be .yml", logConfFile))
 	}
 
-	confFileStream, err := ioutil.ReadFile(logConfFile)
+	confFileStream, err := os.ReadFile(logConfFile)
 	if err != nil {
 		InitLogger(nil)
-		return perrors.New(fmt.Sprintf("ioutil.ReadFile file:%s, error:%v", logConfFile, err))
+		return perrors.New(fmt.Sprintf("os.ReadFile file:%s, error:%v", logConfFile, err))
 	}
 
 	conf := &zap.Config{}

@@ -36,7 +36,7 @@ func init() {
 	//username, password, host, port, dbname := config.Bootstrap.GetMysqlConfig()
 	//dataSourceName := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname + "?charset=utf8"
 	//db, err = sql.Open(MysqlDriver, dataSourceName)
-	db, err = sql.Open(MysqlDriver, "root:123456@tcp(127.0.0.1:3306)/pixiu")
+	db, err = sql.Open(MysqlDriver, "root:ysql442SfrOrc413@tcp(127.0.0.1:3306)/pixiu")
 	if err != nil {
 		panic(err)
 	}
