@@ -21,11 +21,15 @@ import (
 	"fmt"
 	"os"
 	"time"
+)
 
-	"github.com/dubbogo/pixiu-admin/pkg/global"
+import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+)
 
+import (
+	"github.com/dubbogo/pixiu-admin/pkg/global"
 	utils "github.com/dubbogo/pixiu-admin/pkg/utils"
 )
 
