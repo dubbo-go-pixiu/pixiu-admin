@@ -30,7 +30,7 @@ import (
 
 import (
 	"github.com/dubbogo/pixiu-admin/pkg/global"
-	"github.com/dubbogo/pixiu-admin/pkg/utils"
+	utils "github.com/dubbogo/pixiu-admin/pkg/utils"
 )
 
 var level zapcore.Level

@@ -24,41 +24,45 @@ import (
 	"os"
 	"strconv"
 	"time"
-)
 
-import (
 	"github.com/apache/dubbo-go-pixiu/pkg/common/constant"
 
-	fc "github.com/dubbogo/dubbo-go-pixiu-filter/pkg/api/config"
-	"github.com/dubbogo/dubbo-go-pixiu-filter/pkg/xds"
-	pixiupb "github.com/dubbogo/dubbo-go-pixiu-filter/pkg/xds/model"
+	fc "github.com/dubbo-go-pixiu/pixiu-api/pkg/api/config"
+	"github.com/dubbo-go-pixiu/pixiu-api/pkg/xds"
+
+	pixiupb "github.com/dubbo-go-pixiu/pixiu-api/pkg/xds/model"
 
 	core "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+
 	clusterservice "github.com/envoyproxy/go-control-plane/envoy/service/cluster/v3"
+
 	discoverygrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
+
 	endpointservice "github.com/envoyproxy/go-control-plane/envoy/service/endpoint/v3"
+
 	extensionpb "github.com/envoyproxy/go-control-plane/envoy/service/extension/v3"
+
 	listenerservice "github.com/envoyproxy/go-control-plane/envoy/service/listener/v3"
+
 	routeservice "github.com/envoyproxy/go-control-plane/envoy/service/route/v3"
+
 	runtimeservice "github.com/envoyproxy/go-control-plane/envoy/service/runtime/v3"
+
 	secretservice "github.com/envoyproxy/go-control-plane/envoy/service/secret/v3"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/types"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	"github.com/envoyproxy/go-control-plane/pkg/resource/v3"
-	envoyServer "github.com/envoyproxy/go-control-plane/pkg/server/v3"
 
+	envoyServer "github.com/envoyproxy/go-control-plane/pkg/server/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
-
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/structpb"
-	structpb2 "google.golang.org/protobuf/types/known/structpb"
-)
 
-import (
 	"github.com/dubbogo/pixiu-admin/pkg/config"
 	"github.com/dubbogo/pixiu-admin/pkg/logger"
 	"github.com/dubbogo/pixiu-admin/pkg/logic"
+	structpb2 "google.golang.org/protobuf/types/known/structpb"
 )
 
 var (
@@ -263,11 +267,13 @@ func makeClusters() *pixiupb.PixiuExtensionClusters {
 		pbCluster.Clusters = append(pbCluster.Clusters, &pixiupb.Cluster{
 			Name:    c.Name,
 			TypeStr: c.Type,
-			Endpoints: &pixiupb.Endpoint{
-				Id: c.Name + strconv.Itoa(c.ID),
-				Address: &pixiupb.SocketAddress{
-					Address: c.Address,
-					Port:    int64(c.Port),
+			Endpoints: []*pixiupb.Endpoint{
+				&pixiupb.Endpoint{
+					Id: c.Name + strconv.Itoa(c.ID),
+					Address: &pixiupb.SocketAddress{
+						Address: c.Address,
+						Port:    int64(c.Port),
+					},
 				},
 			},
 		})
@@ -277,7 +283,7 @@ func makeClusters() *pixiupb.PixiuExtensionClusters {
 }
 
 // GenerateSnapshotPixiu returns a snapshot with a single cluster and endpoint.
-func GenerateSnapshotPixiu() cache.Snapshot {
+func GenerateSnapshotPixiu() *cache.Snapshot {
 	ldsResource, _ := anypb.New(makeListeners())
 	cdsResource, _ := anypb.New(makeClusters())
 	snap, _ := cache.NewSnapshot("2",
