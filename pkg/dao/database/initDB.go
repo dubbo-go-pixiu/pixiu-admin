@@ -19,9 +19,12 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
+	"sync"
 )
 
 import (
+	"github.com/dubbogo/pixiu-admin/pkg/config"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -29,14 +32,18 @@ import (
 const MysqlDriver = "mysql"
 
 var db *sql.DB
+var initDb sync.Once
 
-func init() {
+func Init(mysqlConf config.MysqlConfig) {
 	var err error
 
 	//username, password, host, port, dbname := config.Bootstrap.GetMysqlConfig()
 	//dataSourceName := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname + "?charset=utf8"
 	//db, err = sql.Open(MysqlDriver, dataSourceName)
-	db, err = sql.Open(MysqlDriver, "root:123456@tcp(127.0.0.1:3306)/pixiu")
+	connectStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8",
+		mysqlConf.Username, mysqlConf.Password,
+		mysqlConf.Host, mysqlConf.Port, mysqlConf.Dbname)
+	db, err = sql.Open(MysqlDriver, connectStr)
 	if err != nil {
 		panic(err)
 	}
@@ -45,5 +52,8 @@ func init() {
 }
 
 func GetConnection() *sql.DB {
+	initDb.Do(func() {
+		Init(config.Bootstrap.MysqlConfig)
+	})
 	return db
 }
