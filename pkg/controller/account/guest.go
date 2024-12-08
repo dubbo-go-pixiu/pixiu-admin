@@ -18,7 +18,6 @@
 package account
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -92,9 +91,6 @@ func Login(c *gin.Context) {
 
 	password = utils.Md5(password)
 	flag, _ := account.Login(username, password)
-	fmt.Printf("username:%s\n", username)
-	fmt.Printf("password:%s\n", password)
-	fmt.Printf("flag:%v\n", flag)
 	if flag {
 		generateToken(c, username)
 	} else {

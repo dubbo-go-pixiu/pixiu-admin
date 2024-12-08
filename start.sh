@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# 打印脚本执行的开始信息
 echo "Starting the Pixiu admin panel, frontend, and etcd..."
 
 # ------------------------------
@@ -52,7 +51,6 @@ echo "etcd service is already running with container name: $ETCD_CONTAINER_NAME 
     fi
 fi
 
-# 等待 etcd 服务准备好（等待一段时间）
 echo "Waiting for etcd to be ready..."
 sleep 5 # 等待 5 秒，确保 etcd 服务已启动并可用
 
@@ -80,7 +78,6 @@ fi
 # 启动前端服务（Vue.js）
 # ------------------------------
 
-# 进入前端目录
 cd ./web  # 进入前端项目目录
 
 # 安装前端依赖
@@ -105,8 +102,6 @@ fi
 # ------------------------------
 echo "Both backend and frontend services have been started successfully."
 
-# 监听 Ctrl+C 来终止所有进程
 trap 'echo "Stopping services..."; kill $BACKEND_PID $FRONTEND_PID; docker stop $ETCD_CONTAINER_NAME; exit 0' SIGINT
 
-# 保持脚本运行，直到手动停止
 wait $BACKEND_PID $FRONTEND_PID
