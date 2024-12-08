@@ -45,7 +45,13 @@ func Init(mysqlConf config.MysqlConfig) {
 		mysqlConf.Host, mysqlConf.Port, mysqlConf.Dbname)
 	db, err = sql.Open(MysqlDriver, connectStr)
 	if err != nil {
-		panic(err)
+		panic(fmt.Sprintf("Failed to open MySQL connection: %v", err))
+	}
+
+	fmt.Println("Database connection opened, testing with Ping...")
+
+	if err := db.Ping(); err != nil {
+		panic(fmt.Sprintf("Failed to ping MySQL: %v", err))
 	}
 	db.SetMaxOpenConns(20)
 	db.SetMaxIdleConns(20)
@@ -55,5 +61,9 @@ func GetConnection() *sql.DB {
 	initDb.Do(func() {
 		Init(config.Bootstrap.MysqlConfig)
 	})
+	if db == nil {
+		panic("Database connection is nil. Initialization failed.")
+	}
+
 	return db
 }

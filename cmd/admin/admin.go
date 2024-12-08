@@ -18,6 +18,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"os/signal"
 	"strconv"
@@ -31,7 +32,6 @@ import (
 import (
 	"github.com/dubbogo/pixiu-admin/pkg/config"
 	"github.com/dubbogo/pixiu-admin/pkg/core"
-	"github.com/dubbogo/pixiu-admin/pkg/logger"
 )
 
 var (
@@ -52,9 +52,10 @@ var (
 			initDefaultValue()
 		},
 		Run: func(cmd *cobra.Command, args []string) {
+			// 加载配置文件
 			_, err := config.LoadAPIConfigFromFile(configPath)
 			if err != nil {
-				logger.Errorf("load admin config  error:%+v", err)
+				log.Fatalf("load admin config error: %+v", err)
 			}
 			Start()
 			// gracefully shutdown
@@ -79,6 +80,7 @@ func Stop() {
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&configPath, "config", "c", os.Getenv("DUBBOGO_PIXIU_CONFIG"), "Load configuration from `FILE`")
 	rootCmd.PersistentFlags().StringVarP(&apiConfigPath, "api-config", "a", os.Getenv("DUBBOGO_PIXIU_API_CONFIG"), "Load api configuration from `FILE`")
+	
 }
 
 func getRootCmd() *cobra.Command {
