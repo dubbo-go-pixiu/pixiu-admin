@@ -4,7 +4,7 @@ go 1.22
 
 toolchain go1.22.0
 
-replace github.com/dubbogo/pixiu-admin => github.com/dubbo-go-pixiu/pixiu-admin v0.0.0-227bdd3
+replace github.com/dubbogo/pixiu-admin => github.com/dubbo-go-pixiu/pixiu-admin v0.0.0-20241201025302-cadf51e50afc
 
 require (
 	github.com/apache/dubbo-go-pixiu v1.0.0-rc4.0.20241117121807-0b6eef0f6b35

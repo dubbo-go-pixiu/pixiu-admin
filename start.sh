@@ -65,7 +65,7 @@ cd ./ # 如果你的后端项目路径不同，记得修改这里
 
 # 启动后端服务
 echo "Starting backend service..."
-go run cmd/admin/admin.go &  # 启动后端服务并将其置于后台
+go run cmd/admin/admin.go -c configs/admin_config.yaml&  # 启动后端服务并将其置于后台
 BACKEND_PID=$!  # 获取后端服务的进程ID
 
 # 检查后端是否启动成功

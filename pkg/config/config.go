@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"strings"
 	"time"
 )
@@ -84,11 +85,14 @@ type RetData struct {
 
 // LoadAPIConfigFromFile load config from file
 func LoadAPIConfigFromFile(path string) (*AdminBootstrap, error) {
+	fmt.Printf("configPath:%v\n", path)
 	if len(path) == 0 {
 		return nil, perrors.Errorf("Config file not specified")
 	}
 	adminBootstrap := &AdminBootstrap{}
+	fmt.Println("88888888\n")
 	err := yaml.UnmarshalYMLConfig(path, adminBootstrap)
+	fmt.Printf("adminBootStrap:%v\n", adminBootstrap)
 	if err != nil {
 		return nil, perrors.Errorf("unmarshalYmlConfig error %v", perrors.WithStack(err))
 	}

@@ -24,11 +24,11 @@ system:
 
 # mysql connect configuration
 mysql:
-  address: ''
+  address: '127.0.0.1:3306'
   config: ''
-  db-name: ''
-  username: ''
-  password: ''
+  db-name: 'pixiu'
+  username: 'root'
+  password: 'ysql442SfrOrc413'
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: false
