@@ -47,7 +47,6 @@ func Init(mysqlConf config.MysqlConfig) {
 	if err != nil {
 		panic(err)
 	}
-
 	db.SetMaxOpenConns(20)
 	db.SetMaxIdleConns(20)
 }
@@ -56,6 +55,5 @@ func GetConnection() *sql.DB {
 	initDb.Do(func() {
 		Init(config.Bootstrap.MysqlConfig)
 	})
-
 	return db
 }
