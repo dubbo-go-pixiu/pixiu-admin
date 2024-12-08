@@ -18,7 +18,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 	"strconv"
@@ -50,13 +49,9 @@ var (
 			"(c) " + strconv.Itoa(time.Now().Year()) + " Dubbogo",
 		Version: config.Version,
 		PreRun: func(cmd *cobra.Command, args []string) {
-			fmt.Println("Entering PreRun...")
 			initDefaultValue()
 		},
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("Running the command...")
-			fmt.Println("Config path:", configPath)
-
 			_, err := config.LoadAPIConfigFromFile(configPath)
 			if err != nil {
 				logger.Errorf("load admin config  error:%+v", err)
@@ -82,7 +77,6 @@ func Stop() {
 
 // init Init startCmd
 func init() {
-	fmt.Println("Entering init function...")
 	rootCmd.PersistentFlags().StringVarP(&configPath, "config", "c", os.Getenv("DUBBOGO_PIXIU_CONFIG"), "Load configuration from `FILE`")
 	rootCmd.PersistentFlags().StringVarP(&apiConfigPath, "api-config", "a", os.Getenv("DUBBOGO_PIXIU_API_CONFIG"), "Load api configuration from `FILE`")
 }
@@ -103,7 +97,6 @@ func initDefaultValue() {
 
 // main admin run method
 func main() {
-	fmt.Println("Entering main function...")
 	app := getRootCmd()
 
 	// ignore error so we don't exit non-zero and break gfmrun README example tests
