@@ -9,7 +9,7 @@ echo "Starting the Pixiu admin panel, frontend, and etcd..."
 # Use docker ps to get the names and images of all containers, and use grep to match etcd images
 ETCD_CONTAINER_NAME=$(docker ps -a --format "{{.Names}} {{.Image}}" | grep -i "etcd" | awk '{print $1}')
 ETCD_CONTAINER_IMAGE=$(docker ps -a --format "{{.Names}} {{.Image}} {{.Status}}" | grep -i "etcd" | awk '{print $2}')
-ETCD_CONTAINER_STATUS=$(docker ps -a --format "{{.Names}} {{.Image}} {{.Status}}" | grep -i "etcd" | awk '{print $3" "$4" "$5}') # 获取容器状态
+ETCD_CONTAINER_STATUS=$(docker ps -a --format "{{.Names}} {{.Image}} {{.Status}}" | grep -i "etcd" | awk '{print $3" "$4" "$5}')
 
 # If no running etcd container is found, start a new one
 if [ -z "$ETCD_CONTAINER_NAME" ]; then
