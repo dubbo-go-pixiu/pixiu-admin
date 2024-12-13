@@ -47,6 +47,7 @@ func Init(mysqlConf config.MysqlConfig) {
 	if err != nil {
 		panic(err)
 	}
+
 	db.SetMaxOpenConns(20)
 	db.SetMaxIdleConns(20)
 }

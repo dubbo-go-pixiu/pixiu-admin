@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"github.com/dubbogo/pixiu-admin/pkg/logic/account"
 	"net/http"
 )
 
@@ -36,6 +37,10 @@ func RunServer() {
 	global.LOG = Zap()
 
 	config.InitEtcdClient()
+
+	account.InitUserDao()
+	account.InitGuestDao()
+
 	router := initialize.Routers()
 
 	address := fmt.Sprintf(":%d", global.CONFIG.System.Addr)

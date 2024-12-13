@@ -22,10 +22,30 @@ import (
 	"github.com/dubbogo/pixiu-admin/pkg/dao/impl"
 )
 
-var (
-	guestDao dao.GuestDao = impl.NewGuestDao()
-	userDao  dao.UserDao  = impl.NewUserDao()
-)
+//var (
+//	guestDao dao.GuestDao = impl.NewGuestDao()
+//	userDao  dao.UserDao  = impl.NewUserDao()
+//)
+
+// 延迟初始化
+var guestDao dao.GuestDao
+var userDao dao.UserDao
+
+// InitGuestDao 初始化后的 guestDao
+func InitGuestDao() {
+	if guestDao == nil {
+		// 在第一次访问时初始化
+		guestDao = impl.NewGuestDao()
+	}
+}
+
+// InitUserDao 初始化后的 userDao
+func InitUserDao() {
+	if userDao == nil {
+		// 在第一次访问时初始化
+		userDao = impl.NewUserDao()
+	}
+}
 
 func Login(username string, password string) (bool, int) {
 	return guestDao.Login(username, password)
