@@ -2,7 +2,6 @@ package core
 
 import (
 	"fmt"
-	"github.com/dubbogo/pixiu-admin/pkg/logic/account"
 	"net/http"
 )
 
@@ -16,6 +15,7 @@ import (
 	"github.com/dubbogo/pixiu-admin/pkg/config"
 	"github.com/dubbogo/pixiu-admin/pkg/global"
 	"github.com/dubbogo/pixiu-admin/pkg/initialize"
+	"github.com/dubbogo/pixiu-admin/pkg/logic/account"
 )
 
 var (
