@@ -22,10 +22,21 @@ import (
 	"github.com/dubbogo/pixiu-admin/pkg/dao/impl"
 )
 
-var (
-	guestDao dao.GuestDao = impl.NewGuestDao()
-	userDao  dao.UserDao  = impl.NewUserDao()
-)
+// Lazy initialization
+var guestDao dao.GuestDao
+var userDao dao.UserDao
+
+func InitGuestDao() {
+	if guestDao == nil {
+		guestDao = impl.NewGuestDao()
+	}
+}
+
+func InitUserDao() {
+	if userDao == nil {
+		userDao = impl.NewUserDao()
+	}
+}
 
 func Login(username string, password string) (bool, int) {
 	return guestDao.Login(username, password)

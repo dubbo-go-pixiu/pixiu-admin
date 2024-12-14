@@ -15,6 +15,7 @@ import (
 	"github.com/dubbogo/pixiu-admin/pkg/config"
 	"github.com/dubbogo/pixiu-admin/pkg/global"
 	"github.com/dubbogo/pixiu-admin/pkg/initialize"
+	"github.com/dubbogo/pixiu-admin/pkg/logic/account"
 )
 
 var (
@@ -36,6 +37,10 @@ func RunServer() {
 	global.LOG = Zap()
 
 	config.InitEtcdClient()
+
+	account.InitUserDao()
+	account.InitGuestDao()
+
 	router := initialize.Routers()
 
 	address := fmt.Sprintf(":%d", global.CONFIG.System.Addr)
