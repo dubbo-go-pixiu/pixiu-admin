@@ -98,6 +98,7 @@ func LoadAPIConfigFromFile(path string) (*AdminBootstrap, error) {
 
 // InitEtcdClient init etcd client
 func InitEtcdClient() {
+	//Bootstrap.EtcdConfig.Address = "etcd_pixiu:2379"
 	newClient, err := etcdv3.NewConfigClientWithErr(
 		etcdv3.WithName(etcdv3.RegistryETCDV3Client),
 		etcdv3.WithTimeout(20*time.Second),
