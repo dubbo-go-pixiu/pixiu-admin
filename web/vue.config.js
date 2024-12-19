@@ -46,7 +46,7 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             "/config": {
-                target: "http://127.0.0.1:8081",
+                target: "http://go_backend:8081",
                 ws: true, // enable websocket proxy
                 changOrigin: true, // enable proxy module
                 // proxy url replace rules
@@ -55,7 +55,7 @@ module.exports = {
                 },
             },
             "/login": {
-                target: "http://127.0.0.1:8081",
+                target: "http://go_backend:8081",
                 ws: true, // enable websocket proxy
                 changOrigin: true, // enable proxy module
                 // proxy url replace rules
