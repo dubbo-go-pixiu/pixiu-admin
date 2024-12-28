@@ -45,7 +45,7 @@ services:
       sh -c "
         curl -sS http://etcd_pixiu:2379/health || exit 1 &&
         go mod tidy &&
-        go run ./cmd/admin/admin.go -c docker-config.yaml
+        go run ./cmd/admin/admin.go -c admin_docker_config.yaml
       "
     environment:
       - GO111MODULE=on

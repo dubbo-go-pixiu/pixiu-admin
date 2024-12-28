@@ -19,3 +19,5 @@
 build.sh
 
 vendor
+
+etcd-data/
