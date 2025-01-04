@@ -64,6 +64,8 @@ services:
       - ./web:/app/web
     ports:
       - "8080:8080"
+    environment:
+      - VUE_APP_BACKEND_URL=http://go_backend:8081
     command: >
       sh -c "
         yarn install &&

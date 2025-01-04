@@ -1,17 +1,39 @@
 # pixiu-admin
-pixiu admin
 
+## Start Admin Service
 
-## prepare etcd config
+You can start the Pixiu Admin service either through local debugging or by using Docker Compose. Both methods are simple and fast.
 
-run etcd local or in docker
+### 1. Local Debugging
 
-## Start admin
+If you prefer to run Pixiu Admin locally, follow these steps:
 
-run cmd/admin/admin.go
+1. **Clone the repository (if not done already):**
 
-config program arguments：
-- -c /xx/pixiu-admin/configs/admin_config.yaml
+   ```bash
+   git clone https://your-repository-url.git
+   cd pixiu-admin
+
+2.  **Make sure the admin_config.yaml file is properly configured. You can pass the config file path as a program argument:**
+
+    ```bash
+    go run cmd/admin/admin.go -c /xx/pixiu-admin/configs/admin_config.yaml
+### 2. Start Using Docker Compose（One click start）
+1. **Clone the repository (if not done already):**
+
+   ```bash
+   git clone https://your-repository-url.git
+   cd pixiu-admin
+2.  **Start the service using Docker Compose:
+   Run the following command to start Pixiu Admin and its dependencies (like Etcd) in the background:**
+
+   ```bash
+    docker-compose up -d
+3.  **Access the Pixiu Admin service:
+    After starting, you can access the service via:**
+
+    ```bash
+    http://localhost:8081
 
 ## operation
 
