@@ -40,7 +40,6 @@ func Zap() (logger *zap.Logger) {
 		fmt.Printf("create %v directory\n", global.CONFIG.Zap.Director)
 		_ = os.Mkdir(global.CONFIG.Zap.Director, os.ModePerm)
 	}
-	fmt.Printf("use zap director %v\n", global.CONFIG.Zap.Prefix)
 	switch global.CONFIG.Zap.Level {
 	case "debug":
 		level = zap.DebugLevel
