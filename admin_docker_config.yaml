@@ -20,32 +20,14 @@
 server:
   address: 127.0.0.1:8081
 etcd:
-  address: 127.0.0.1:2379
+  address: etcd_pixiu:2379
   path: /pixiu/config/api
 mysql:
   username: root
-  password: 123456
-  host: 192.168.31.44
+  password: root_password
+  host: mysql_pixiu
   port: 3306
   dbname: pixiu
-# zap logger configuration
-zap:
-  level: 'info'
-  format: 'console'
-  prefix: '[DUBBOGO-PIXIU-ADMIN]'
-  director: 'log'
-  show-line: true
-  encode-level: 'LowercaseColorLevelEncoder'
-  stacktrace-key: 'stacktrace'
-  log-in-console: true
-
-# redis configuration
-redis:
-  db: 0
-  addr: '127.0.0.1:6379'
-  password: ''
-
-
 # system configuration
 system:
   env: 'public'
